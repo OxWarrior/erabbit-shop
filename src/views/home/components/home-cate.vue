@@ -5,13 +5,23 @@
       <!-- 鼠标进入一级菜单id -->
       <li @mouseenter="categoryId = item.id" :class="{active:categoryId === item.id}" v-for="item in $store.getters['cate/leftCateList']" :key="item.id">
         <RouterLink to="/">{{item.name}}</RouterLink>
-        <RouterLink v-for="tag in item.children" :key="tag.id" to="/">{{tag.name}}</RouterLink>
+        <!-- 二级菜单 -->
+        <template v-if="item.children">
+          <RouterLink v-for="tag in item.children" :key="tag.id" to="/">{{tag.name}}</RouterLink>
+        </template>
+        <!-- 骨架屏 -->
+        <span v-else>
+          <XtxSkeleton width="60px" height="18px" style="margin-right:5px" bg="rgba(255,255,255,0.2)" />
++          <XtxSkeleton width="50px" height="18px" bg="rgba(255,255,255,0.2)" />
+        </span>
       </li>
+      <!-- 品牌 -->
       <li @mouseenter="categoryId = brand.id" :class="{active:categoryId === brand.id}">
         <RouterLink to="/">{{brand.name}}</RouterLink>
         <RouterLink to="/">{{brand.children[0].name}}</RouterLink>
       </li>
     </ul>
+
     <!-- 弹层 -->
     <div class="layer">
       <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
@@ -199,6 +209,17 @@ export default {
     .layer {
       display: block;
     }
+  }
+}
+.xtx-skeleton {
+  animation: fade 1s linear infinite alternate;
+}
+@keyframes fade {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>
