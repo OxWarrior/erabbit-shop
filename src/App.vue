@@ -1,7 +1,10 @@
 <template>
-  <div></div>
+  <router-view />
 </template>
 
-<style lang="less">
+<script>
+export default {
+  name: 'App'
 
-</style>
+}
+</script>
