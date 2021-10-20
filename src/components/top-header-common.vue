@@ -3,15 +3,22 @@
     <li class="home">
       <RouterLink to="/">首页</RouterLink>
     </li>
-    <li v-for="item in $store.state.cate.cateList" :key="item.id">
-      <a href="#">{{item.name}}</a>
+    <li  @mouseenter="show(item.id)" @mouseleave="hide(item.id)" :class="{active:item.open}" v-for="item in $store.state.cate.cateList" :key="item.id">
+      <!-- 一级分类 -->
+      <router-link @click="hide(item.id)" :to="`/category/${item.id}`">{{item.name}}</router-link>
+      <!-- <a href="#">{{item.name}}</a> -->
+      <!-- 二级分类 -->
       <div class="layer">
         <ul>
           <li v-for="tag in item.children" :key="tag.id">
-            <a href="#">
+            <router-link @click="hide(item.id)" :to="`/category/sub/${tag.id}`">
               <img :src="tag.picture" alt="">
               <p>{{tag.name}}</p>
-            </a>
+            </router-link>
+            <!-- <a href="#">
+              <img :src="tag.picture" alt="">
+              <p>{{tag.name}}</p>
+            </a> -->
           </li>
         </ul>
       </div>
@@ -27,6 +34,26 @@ export default {
   setup () {
     const store = useStore()
     store.dispatch('cate/getCateList')
+
+    // 鼠标进入
+    const show = (id) => {
+      store.commit('cate/updateState', {
+        id,
+        open: true
+      })
+    }
+
+    // 鼠标离开
+    const hide = (id) => {
+      store.commit('cate/updateState', {
+        id,
+        open: false
+      })
+    }
+    return {
+      show,
+      hide
+    }
   }
 }
 </script>
@@ -91,9 +118,9 @@ export default {
         }
       }
     }
-    // hover之后显示出来
-    &:hover {
-         // 加上 >
+    // hover之后显示出来   改hover
+    &.active {
+      // 加上 >
       > a {
         color: @xtxColor;
         border-bottom: 1px solid @xtxColor;

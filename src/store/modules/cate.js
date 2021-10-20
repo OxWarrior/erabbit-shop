@@ -16,6 +16,14 @@ export default {
     }
   },
   mutations: {
+    // 更新标志位状态
+    updateState (state, payload) {
+      const cate = state.cateList.find(item => item.id === payload.id)
+      if (cate) {
+        cate.open = payload.open
+      }
+    },
+
     // 更新分类
     updateCate (state, payload) {
       state.cateList = payload
@@ -26,6 +34,11 @@ export default {
     async getCateList (context) {
       const res = await findHeadCategory()
       if (res && res.result) {
+        // 给定一级二级分类的标志位，以显示隐藏
+        res.result.forEach(item => {
+          item.open = false
+        })
+
         context.commit('updateCate', res.result)
       }
     }

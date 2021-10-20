@@ -34,3 +34,25 @@ export const findNew = () => {
     url: 'home/new'
   })
 }
+
+/**
+ * @description 人气推荐
+ * @returns
+ */
+export const findHot = () => {
+  return request({
+    method: 'get',
+    url: 'home/hot'
+  })
+}
+
+/**
+ * @description 获取商品信息
+ * @returns
+ */
+export const findGoods = () => {
+  return request({
+    method: 'get',
+    url: 'home/goods'
+  })
+}
