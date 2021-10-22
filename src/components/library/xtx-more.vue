@@ -1,4 +1,5 @@
 <template>
+  <!-- 查看全部 -->
   <RouterLink :to="path" class="xtx-more">
     <span>查看全部</span>
     <i class="iconfont icon-angle-right"></i>
@@ -34,7 +35,8 @@ export default {
     color: #ccc;
   }
   &:hover {
-    span,i {
+    span,
+    i {
       color: @xtxColor;
     }
   }

@@ -96,7 +96,8 @@
    clear: both;
  }
 
- .fade{
+// 面板动画
+.fade{
   &-leave {
     &-active {
       position: absolute;
@@ -109,3 +110,26 @@
     }
   }
 }
+
+// 面包屑动画
+.fade-right-enter-to,
+.fade-right-leave-from{
+  opacity: 1;
+  transform: none;
+}
+.fade-right-enter-active,
+.fade-right-leave-active{
+  transition: all .5s;
+}
+.fade-right-enter-from,
+.fade-right-leave-to{
+  opacity: 0;
+  transform: translate3d(20px,0,0);
+}
+
+// 路由自带选中高亮
+// .router-link-exact-active {
+//   color: @xtxColor;
+//   border-bottom: 1px solid @xtxColor;
+// }
+

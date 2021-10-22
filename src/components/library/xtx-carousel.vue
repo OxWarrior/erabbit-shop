@@ -1,4 +1,5 @@
 <template>
+  <!-- 轮播图 -->
   <div class='xtx-carousel' @mouseenter="enter" @mouseleave="leave">
     <ul class="carousel-body">
       <li :class="{fade:currentIndex === i}" v-for="(item,i) in sliders" :key="item.id" class="carousel-item">

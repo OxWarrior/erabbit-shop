@@ -3,7 +3,7 @@
     <li class="home">
       <RouterLink to="/">首页</RouterLink>
     </li>
-    <li  @mouseenter="show(item.id)" @mouseleave="hide(item.id)" :class="{active:item.open}" v-for="item in $store.state.cate.cateList" :key="item.id">
+    <li @mousemove="show(item.id)" @mouseleave="hide(item.id)" :class="{active:item.open}" v-for="item in $store.state.cate.cateList" :key="item.id">
       <!-- 一级分类 -->
       <router-link @click="hide(item.id)" :to="`/category/${item.id}`">{{item.name}}</router-link>
       <!-- <a href="#">{{item.name}}</a> -->
@@ -132,4 +132,9 @@ export default {
     }
   }
 }
+.router-link-exact-active {
+  color: @xtxColor;
+  border-bottom: 1px solid @xtxColor;
+}
+
 </style>

@@ -29,7 +29,13 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior () { // 路由切换回顶
+    return {
+      top: 0,
+      left: 0
+    }
+  }
 })
 
 export default router
