@@ -6,6 +6,7 @@ const Login = () => import('@/views/login')
 const Test = () => import('@/views/test')
 const TopCategory = () => import('@/views/category')
 const SubCategory = () => import('@/views/category/sub')
+const Product = () => import('@/views/goods')
 
 const routes = [
   {
@@ -14,7 +15,9 @@ const routes = [
     children: [
       { path: '/', component: Home },
       { path: '/category/:id', component: TopCategory },
-      { path: '/category/sub/:id', component: SubCategory }
+      { path: '/category/sub/:id', component: SubCategory },
+      { path: '/product/:id', component: Product }
+
     ]
   },
   {

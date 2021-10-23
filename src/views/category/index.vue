@@ -4,9 +4,11 @@
       <!-- 面包屑 -->
       <XtxBread>
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <transition name="fade-right" mode="out-in">
+
+        <transition name='fade-right' mode="out-in">
           <XtxBreadItem :key="currentCate.id">{{currentCate.name}}</XtxBreadItem>
         </transition>
+
         <!-- 注释 -->
         <!-- 注释 -->
         <!-- 注释 -->
@@ -60,12 +62,17 @@ export default {
 
     const store = useStore()
     const route = useRoute()
+
     // 当前分类
     const currentCate = computed(() => {
       // vuex和route使用
       const cate = store.state.cate.cateList.find(item => item.id === route.params.id)
       return cate || {}
     })
+    // watch(currentCate, () => {
+    //   console.log(currentCate.value.name)
+    // },
+    // { deep: true })
 
     // 分类信息
     const goods = ref([])

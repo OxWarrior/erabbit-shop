@@ -6,7 +6,6 @@ export default {
   render () {
     // 获取插槽内容
     const slotContent = this.$slots.default().filter(item => typeof item.type !== 'symbol') // 筛选注释
-    console.log(slotContent)
     const dymanicItems = [] // 动态数组
     slotContent.forEach((item, index) => {
       dymanicItems.push(item) // 先添加每一项

@@ -1,5 +1,4 @@
 <template>
-  <!-- 一项面包屑 -->
   <div class="xtx-bread-item">
     <RouterLink v-if="to" :to="to">
       <slot />
@@ -7,7 +6,6 @@
     <span v-else>
       <slot />
     </span>
-    <!-- <i class="iconfont icon-angle-right"></i> -->
   </div>
 </template>
 <script>
