@@ -16,7 +16,7 @@
         <!-- 列表 -->
         <ul>
           <li v-for="item in list" :key="item.id">
-            <GoodsItem :tag="item" />
+            <GoodsItem :goods="item" />
           </li>
         </ul>
         <XtxInfiniteLoading :loading="loading" :finished="finished" @load="load"></XtxInfiniteLoading>
@@ -84,10 +84,11 @@ export default {
       finished.value = false
     })
 
+    // 排序切换
     const sortChange = (sortParams) => {
-      Object.assign(reqParams, sortParams)
+      Object.assign(reqParams, sortParams) // 合并
 
-      if (list.value.length === 0) {
+      if (list.value.length === 0) { // 商品列表无数据重新加载，否则置空
         load()
       } else {
         list.value = []
@@ -100,9 +101,9 @@ export default {
       finished.value = false
     }
 
+    // 筛选切换
     const filterChange = (filterParams) => {
       Object.assign(reqParams, filterParams)
-      console.log(filterParams)
       if (list.value.length === 0) {
         load()
       } else {

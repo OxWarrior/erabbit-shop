@@ -1,9 +1,9 @@
 <template>
   <RouterLink to="/" class='goods-item'>
-    <img :src="tag.picture" alt="">
-    <p class="name ellipsis">{{tag.name}}</p>
-    <p class="desc ellipsis">{{tag.tag}}</p>
-    <p class="price">&yen;{{tag.price}}</p>
+    <img :src="goods.picture" alt="">
+    <p class="name ellipsis">{{goods.name}}</p>
+    <p class="desc ellipsis">{{goods.tag}}</p>
+    <p class="price">&yen;{{goods.price}}</p>
   </RouterLink>
 </template>
 
@@ -11,7 +11,7 @@
 export default {
   name: 'GoodsItem',
   props: {
-    tag: {
+    goods: {
       type: Object,
       default: () => {}
     }

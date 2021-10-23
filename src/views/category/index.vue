@@ -34,7 +34,7 @@
           <XtxMore />
         </div>
         <div class="body">
-          <GoodsItem v-for="tag in item.goods" :key="tag.id" :tag="tag" />
+          <GoodsItem v-for="tag in item.goods" :key="tag.id" :goods="tag" />
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@ export default {
       // 仅需侦听一级分类id的变化
       if (route.fullPath !== `/category/${id}`) return
 
-      findTopCategory(route.params.id).then(res => {
+      findTopCategory(id).then(res => {
         goods.value = res.result
       })
     }, {

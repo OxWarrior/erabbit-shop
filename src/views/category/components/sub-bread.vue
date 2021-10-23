@@ -28,7 +28,7 @@ export default {
         sCate: {} // 二级
       }
 
-      store.state.cate.cateList.some(item => {
+      store.state.cate.cateList.some(item => { // 一级和二级分类的id和name
         const cate = item.children && item.children.find(obj => obj.id === route.params.id)
         if (cate) {
           info.fCate.id = item.id
