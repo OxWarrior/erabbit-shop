@@ -19,14 +19,23 @@
         <div class="spec">
           <!-- 商品详情 -->
           <GoodsName :goods="detail"></GoodsName>
+          <!-- 商品规格 skuId="1369155872197971970" -->
+          <GoodsSku @update-sku="updateSku" :specs="detail.specs" :skus="detail.skus"></GoodsSku>
+          <!-- 商品数量 -->
+          <XtxNumbox :max="detail.inventory" v-model="count">数量</XtxNumbox>
+          <!-- 添加购物车按钮 -->
+          <XtxButton type="primary" size="middle" style="margin-top:10px">加入购物车</XtxButton>
         </div>
       </div>
       <!-- 商品推荐 -->
-      <GoodsRelevant />
+      <GoodsRelevant :id="detail.id" />
+
       <!-- 商品详情 -->
+
       <div class="goods-footer">
         <div class="goods-article">
           <!-- 商品+评价 -->
+          <GoodsTabs></GoodsTabs>
           <div class="goods-tabs"></div>
           <!-- 注意事项 -->
           <div class="goods-warn"></div>
@@ -43,6 +52,8 @@ import GoodsRelevant from './components/goods-relevant'
 import GoodsImage from './components/goods-image'
 import GoodsSales from './components/goods-sales'
 import GoodsName from './components/goods-name'
+import GoodsSku from './components/goods-sku'
+import GoodsTabs from './components/goods-tabs'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { findGoods } from '@/api/product'
@@ -59,12 +70,26 @@ const useGoods = () => {
 
 export default {
   name: 'XtxGoodsPage',
-  components: { GoodsRelevant, GoodsImage, GoodsSales, GoodsName },
+  components: { GoodsRelevant, GoodsImage, GoodsSales, GoodsName, GoodsSku, GoodsTabs },
   setup () {
     const detail = useGoods()
 
+    // 根据选中信息更新
+    const updateSku = (info) => {
+      if (info) {
+        detail.value.price = info.price
+        detail.value.oldPrice = info.oldPrice
+        detail.value.inventory = info.inventory
+      }
+    }
+
+    // 商品数量
+    const count = ref(1)
+
     return {
-      detail
+      detail,
+      count,
+      updateSku
     }
   }
 }

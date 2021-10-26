@@ -3,9 +3,18 @@
   <div class='xtx-carousel' @mouseenter="enter" @mouseleave="leave">
     <ul class="carousel-body">
       <li :class="{fade:currentIndex === i}" v-for="(item,i) in sliders" :key="item.id" class="carousel-item">
-        <RouterLink to="/">
+        <!-- 显示一张图 -->
+        <RouterLink v-if='item.imgUrl' to="/">
           <img :src="item.imgUrl" alt="">
         </RouterLink>
+        <!-- 显示四张图 -->
+        <div v-else class="slider">
+          <RouterLink v-for="goods in item" :key="goods.id" :to="`/product/${goods.id}`">
+            <img :src="goods.picture" alt="">
+            <p class="name ellipsis">{{goods.name}}</p>
+            <p class="price">&yen;{{goods.price}}</p>
+          </RouterLink>
+        </div>
       </li>
     </ul>
     <a @click="toggel(true)" href="javascript:;" class="carousel-btn prev"><i class="iconfont icon-angle-left"></i></a>
@@ -112,6 +121,31 @@ export default {
     &-body {
       width: 100%;
       height: 100%;
+      // 轮播商品
+      .slider {
+        display: flex;
+        justify-content: space-around;
+        padding: 0 40px;
+        > a {
+          width: 240px;
+          text-align: center;
+          img {
+            padding: 20px;
+            width: 230px !important;
+            height: 230px !important;
+          }
+          .name {
+            font-size: 16px;
+            color: #666;
+            padding: 0 40px;
+          }
+          .price {
+            font-size: 16px;
+            color: @priceColor;
+            margin-top: 15px;
+          }
+        }
+      }
     }
     &-item {
       width: 100%;
