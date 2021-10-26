@@ -35,13 +35,19 @@
       <div class="goods-footer">
         <div class="goods-article">
           <!-- 商品+评价 -->
-          <GoodsTabs></GoodsTabs>
-          <div class="goods-tabs"></div>
+          <div class="goods-tabs">
+            <GoodsTabs></GoodsTabs>
+          </div>
           <!-- 注意事项 -->
-          <div class="goods-warn"></div>
+          <div class="goods-warn">
+            <GoodsWarn></GoodsWarn>
+          </div>
         </div>
         <!-- 24热榜+专题推荐 -->
-        <div class="goods-aside"></div>
+        <div class="goods-aside">
+          <GoodsHot :id="detail.id" :type="1"></GoodsHot>
+          <GoodsHot :id="detail.id" :type="2"></GoodsHot>
+        </div>
       </div>
     </div>
   </div>
@@ -54,7 +60,9 @@ import GoodsSales from './components/goods-sales'
 import GoodsName from './components/goods-name'
 import GoodsSku from './components/goods-sku'
 import GoodsTabs from './components/goods-tabs'
-import { ref } from 'vue'
+import GoodsHot from './components/goods-hot'
+import GoodsWarn from './components/goods-warn'
+import { ref, provide } from 'vue'
 import { useRoute } from 'vue-router'
 import { findGoods } from '@/api/product'
 
@@ -65,12 +73,13 @@ const useGoods = () => {
   findGoods(route.params.id).then(res => {
     detail.value = res.result
   })
+
   return detail
 }
 
 export default {
   name: 'XtxGoodsPage',
-  components: { GoodsRelevant, GoodsImage, GoodsSales, GoodsName, GoodsSku, GoodsTabs },
+  components: { GoodsRelevant, GoodsImage, GoodsSales, GoodsName, GoodsSku, GoodsTabs, GoodsHot, GoodsWarn },
   setup () {
     const detail = useGoods()
 
@@ -85,6 +94,8 @@ export default {
 
     // 商品数量
     const count = ref(1)
+
+    provide('detail', detail)
 
     return {
       detail,
