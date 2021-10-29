@@ -6,6 +6,8 @@
 
 import defaultImage from '@/assets/images/200.png'
 
+import Message from './Message'
+
 const importFn = require.context('./', false, /\.vue$/)
 // 匹配目录 是否匹配子文件 正则判断
 // console.dir(importFn)
@@ -52,5 +54,8 @@ export default {
     })
 
     defineDirective(app)
+
+    // 添加到vue实例
+    app.config.globalProperties.$message = Message
   }
 }
